@@ -1,46 +1,46 @@
-import "./App.css";
-import sum from "./components/sum"; //Imports de librerias, archivos locales, components, estilos, etc.
-
-//Datos, funciones, estructuras, clases, etc.
-
-const num1 = 5;
-const num2 = 4;
-
-// function getRamdom() {
-//   return Math.random();
-// }
-
-// let valor1;
-
-//Declaracion de la funcion del componente
-//Hay dos formas principeles de recibir propiedades, directa o de estructurando
+import React, { useState } from "react";
+import AddTask from "./components/addtask";
+import List from "./components/list";
 
 function App() {
-  // Al igual que afuera de la funcion componente, podemos seguir declarando variables, funciones, etc.
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+    if (typeof task === "string" && task.trim() !== "") {
+      const newTasks = [...tasks, { text: task.trim() }];
+      setTasks(newTasks);
+    } else {
+      alert("You need to add a task");
+    }
+  };
+
+  const toggleComplete = (index) => {
+    const newTasks = [...tasks];
+    newTasks[index].completed = !newTasks[index].completed;
+    setTasks(newTasks);
+  };
+
+  const deleteTask = (index) => {
+    const newTasks = tasks.filter((_, i) => i !== index);
+    setTasks(newTasks);
+  };
 
   return (
-    <p>
-      Resultado: <sum>{sum(num1, num2)}</sum>
-    </p>
+    <div>
+      <header>
+        <h1>To-Do List</h1>
+      </header>
+      <main>
+        <h3>¡Add your task!</h3>
+        <AddTask addTask={addTask} />
+        <List
+          tasks={tasks}
+          toggleComplete={toggleComplete}
+          deleteTask={deleteTask}
+        />
+      </main>
+    </div>
   );
 }
 
-// function Header ({ services }) {
-//   // Al igual que afuera de la funcion componente, podemos seguir declarando variables, funciones, etc.
-//   const valor1 = getRamdom();
-//   // HOOKS: Metodos especificos de react para manejar el estado del componente, TIENEN QUE IR DENTRO DE LA FUNCION COMPONENTE
-
-//   // Declaracion de retorno
-//   return {
-//     <>
-//       <Header className="App-header">
-//         Header
-//       <div>
-//       </div>
-
-//     </>
-//   }
-// }
-
-//Exportaciones, comunmente se exporta el componente actual, o podemos exportar multiples componentes, funciones, etc.
 export default App;
