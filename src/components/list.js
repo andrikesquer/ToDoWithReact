@@ -1,17 +1,18 @@
 import Task from "./task";
 
-function List({ tasks, toggleComplete, deleteTask }) {
+function List({ tasks, handleComplete, deleteTask }) {
   return (
-    <ul>
+    <div>
       {tasks.map((task, index) => (
         <Task
           key={index}
           task={task}
-          toggleComplete={() => toggleComplete(index)}
+          handleComplete={handleComplete}
           deleteTask={() => deleteTask(index)}
+          index={index}
         />
       ))}
-    </ul>
+    </div>
   );
 }
 
