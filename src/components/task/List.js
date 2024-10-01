@@ -1,4 +1,4 @@
-import Task from "./task";
+import Task from "./Task";
 
 function List({ tasks, handleComplete, deleteTask }) {
   return (

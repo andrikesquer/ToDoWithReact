@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import AddTask from "../components/addtask";
-import List from "../components/list";
+import AddTask from "../components/task/Addtask";
+import List from "../components/task/List";
 import {
   ThemeProvider,
   createTheme,
